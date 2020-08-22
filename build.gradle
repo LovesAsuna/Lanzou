@@ -44,7 +44,7 @@ bintray {
         vcsUrl = 'https://github.com/LovesAsuna/Lanzou.git'
         version {
             name = project.version
-            desc = 'Minecraft Plugin Dependency'
+            desc = 'Library for Lanzou'
             released = new Date()
         }
     }
@@ -54,7 +54,7 @@ publishing {
     publications {
         plugin(MavenPublication) {
             from components.java
-            description 'Minecraft Plugin Dependency'
+            description 'Library for Lanzou'
             pom {
                 developers {
                     developer {
