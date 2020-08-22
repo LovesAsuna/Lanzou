@@ -40,7 +40,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'Lanzou'
-        licenses = ['LPGL-3.0']
+        licenses = ['AGPL-3.0']
         vcsUrl = 'https://github.com/LovesAsuna/Lanzou.git'
         version {
             name = project.version
