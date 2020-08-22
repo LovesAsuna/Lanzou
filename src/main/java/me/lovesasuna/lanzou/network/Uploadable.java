@@ -9,7 +9,5 @@ import java.io.File;
  * @date 2020/8/22 14:07
  **/
 public interface Uploadable {
-    boolean upload(User user, File file);
-
     boolean upload(User user, File file, int loc);
 }

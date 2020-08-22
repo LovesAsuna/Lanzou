@@ -1,7 +1,6 @@
 package me.lovesasuna.lanzou.network;
 
-import java.io.File;
-import java.net.URL;
+import java.nio.file.Path;
 
 /**
  * @author LovesAsuna
@@ -9,10 +8,10 @@ import java.net.URL;
  **/
 public interface Downloadable {
     /**
-     * 通过链接下载文件
+     * 下载文件
      *
-     * @param url 下载复制
+     * @param path
      * @return 下载成功与否
      **/
-    boolean download(URL url, File file);
+    boolean download(Path path);
 }

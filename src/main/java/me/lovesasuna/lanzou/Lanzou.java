@@ -19,16 +19,24 @@ import java.util.Objects;
  **/
 public class Lanzou {
     private Item item;
+    private boolean debug;
 
     public Lanzou() {
+        this(false);
     }
 
-    public Lanzou(URL url) {
-        this(url.getPath().replaceFirst("/", ""));
+    public Lanzou(boolean debug) {
+        this.debug = debug;
     }
 
-    public Lanzou(String suffix) {
+    public Item parseSuffix(String suffix) {
         item = getItem(suffix);
+        return item;
+    }
+
+    public Item parseUrl(URL url) {
+        item = getItem(url.getPath().replaceFirst("/", ""));
+        return item;
     }
 
     private Item getItem(String suffix) throws NullPointerException {
@@ -47,7 +55,7 @@ public class Lanzou {
                 FolderImpl folder = new FolderImpl(suffix);
                 item = folder;
             }
-            item.init(reader);
+            item.init(reader, false);
             return item;
         } finally {
             try {

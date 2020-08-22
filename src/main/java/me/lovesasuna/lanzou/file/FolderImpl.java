@@ -10,8 +10,10 @@ import me.lovesasuna.lanzou.utils.ReaderUtil;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author LovesAsuna
@@ -24,7 +26,7 @@ public class FolderImpl extends FolderItem {
     }
 
     @Override
-    public void init(BufferedReader reader) {
+    public void init(BufferedReader reader, boolean debug) {
         try {
             // 文件夹
             Triple<Integer, InputStream, Integer> result;
@@ -66,10 +68,26 @@ public class FolderImpl extends FolderItem {
                 String time = fileNode.get("time").asText();
                 FileImpl file = new FileImpl(id);
                 file.setIcon(icon).setName(name).setTime(time).setSize(size);
+                String lanzousUrl = "https://wwa.lanzous.com/" + id;
+                result = NetWorkUtil.get(lanzousUrl);
+                Objects.requireNonNull(result);
+                reader = new BufferedReader(new InputStreamReader(result.second));
+                if (Item.isFile(reader)) {
+                    file.init(reader, false);
+                }
                 fileItemSet.add(file);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean download(Path path) {
+        AtomicBoolean success = new AtomicBoolean(true);
+        fileItemSet.forEach(fileItem -> {
+            success.set(success.get() && fileItem.download(path));
+        });
+        return success.get();
     }
 }

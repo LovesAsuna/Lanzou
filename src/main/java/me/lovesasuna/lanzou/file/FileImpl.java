@@ -1,5 +1,6 @@
 package me.lovesasuna.lanzou.file;
 
+import me.lovesasuna.lanzou.bean.Debuger;
 import me.lovesasuna.lanzou.bean.Triple;
 import me.lovesasuna.lanzou.network.Downloadable;
 import me.lovesasuna.lanzou.utils.DownloadUtil;
@@ -8,6 +9,7 @@ import me.lovesasuna.lanzou.utils.ReaderUtil;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,17 +52,18 @@ public class FileImpl extends FileItem implements Downloadable {
     }
 
     @Override
-    public boolean download(URL url, File file) {
-        return DownloadUtil.download(url.toString(), file.getParent(), file.getPath(), new String[]{"Accept-Language", "zh-CN,zh;q=0.9"});
+    public boolean download(Path path) {
+        return DownloadUtil.download(downloadableUrl.toString(), name, path.normalize().toString(), new String[]{"Accept-Language", "zh-CN,zh;q=0.9"});
     }
 
-
     @Override
-    public void init(BufferedReader reader) {
+    public void init(BufferedReader reader, boolean debug) {
         try {
             // 文件
+            Debuger debuger = new Debuger();
+            debuger.setItem(this);
             Triple<Integer, InputStream, Integer> result;
-            ReaderUtil.readAnyTime(2, reader);
+            ReaderUtil.readAnyTime(3, reader);
             String line = reader.readLine();
             Matcher matcher;
             // 获取文件名
@@ -85,12 +88,13 @@ public class FileImpl extends FileItem implements Downloadable {
             if (matcher.find()) {
                 time = matcher.group();
             }
-
-            ReaderUtil.readAnyTime(16, reader);
+            ReaderUtil.readAnyTime(15, reader);
             String src = reader.readLine();
+            debuger.setSrc(src);
             reader.close();
             String fn = src.split("\"")[5];
             String fnurl = "https://wwa.lanzous.com" + fn;
+            debuger.setFnurl(fnurl);
             result = NetWorkUtil.get(fnurl);
             Objects.requireNonNull(result);
             reader = new BufferedReader(new InputStreamReader(result.second));
@@ -104,16 +108,20 @@ public class FileImpl extends FileItem implements Downloadable {
                 sign = matcher.group();
                 Objects.requireNonNull(sign);
             }
+            debuger.setSign(sign);
             String data = "action=downprocess&sign=" + sign + "&ves=1";
+            debuger.setData(data);
             result = NetWorkUtil.post("https://wwa.lanzous.com/ajaxm.php", data.getBytes(),
                     new String[]{"Referer", fnurl},
                     new String[]{"Cookie", "noads=1; pc_ad1=1"},
                     new String[]{"Host", "wwa.lanzous.com"});
             Objects.requireNonNull(result);
             reader = new BufferedReader(new InputStreamReader(result.second));
-
             setUrl("https://vip.d0.baidupan.com/file/" + reader.readLine().split("\"")[9]);
             reader.close();
+            if (debug) {
+                System.out.println(debuger);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
