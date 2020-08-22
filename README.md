@@ -8,14 +8,22 @@ Fast, simple, reliable.  Lanzou is a "zero-overhead" production ready library fo
 
 &nbsp;&nbsp;&nbsp;<sup>**"Simplicity is prerequisite for reliability."**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Edsger Dijkstra*</sup>
-
 ----------------------------------------------------
+## Repository
+```
+https://jcenter.bintray.com/
+```
+### Maven
 ```xml
     <dependency>
         <groupId>me.lovesasuna</groupId>
         <artifactId>Lanzou</artifactId>
         <version>1.0</version>
     </dependency>
+```
+### Gradle
+```
+implementation 'org.sct.vault:VaultAPI:1.7'
 ```
 ----------------------------------------------------
 [Codacy Status]:https://app.codacy.com/project/badge/Grade/0364d226b78149979387cb47f44b365c
