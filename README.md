@@ -4,7 +4,7 @@
 [![][Build Status img]][Build Status]
 [![][license img]][license]
 
-Fast, simple, reliable.  HikariCP is a "zero-overhead" production ready JDBC connection pool.  At roughly 130Kb, the library is very light.  Read about [how we do it here](https://github.com/brettwooldridge/HikariCP/wiki/Down-the-Rabbit-Hole).
+Fast, simple, reliable.  Lanzou is a "zero-overhead" production ready library for lanzou service.  At roughly 5Kb, the library is very light.
 
 &nbsp;&nbsp;&nbsp;<sup>**"Simplicity is prerequisite for reliability."**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- *Edsger Dijkstra*</sup>
