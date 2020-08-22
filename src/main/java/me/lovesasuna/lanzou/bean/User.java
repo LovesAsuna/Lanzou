@@ -1,8 +1,6 @@
 package me.lovesasuna.lanzou.bean;
 
 
-import javafx.scene.paint.Material;
-
 import java.util.regex.Matcher;
 
 import static java.util.regex.Pattern.compile;
