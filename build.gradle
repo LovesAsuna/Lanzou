@@ -39,9 +39,9 @@ bintray {
     publications = ['plugin']
     pkg {
         repo = 'maven'
-        name = 'EasyLib'
+        name = 'Lanzou'
         licenses = ['LPGL-3.0']
-        vcsUrl = 'https://github.com/LovesAsuna/EasyLib.git'
+        vcsUrl = 'https://github.com/LovesAsuna/Lanzou.git'
         version {
             name = project.version
             desc = 'Minecraft Plugin Dependency'
@@ -64,11 +64,11 @@ publishing {
                 licenses {
                     license {
                         name = 'LGPL-3.0'
-                        url = 'https://github.com/LovesAsuna/EasyLib/raw/master/LICENSE'
+                        url = 'https://github.com/LovesAsuna/Lanzou/raw/master/LICENSE'
                     }
                 }
                 scm {
-                    url = 'https://github.com/LovesAsuna/EasyLib'
+                    url = 'https://github.com/LovesAsuna/Lanzou'
                 }
             }
         }

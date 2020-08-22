@@ -8,12 +8,10 @@ import me.lovesasuna.lanzou.utils.NetWorkUtil;
 import me.lovesasuna.lanzou.utils.ReaderUtil;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.regex.Matcher;
 
 /**
  * @author LovesAsuna

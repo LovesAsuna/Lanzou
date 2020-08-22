@@ -5,7 +5,6 @@ import me.lovesasuna.lanzou.file.FileImpl;
 import me.lovesasuna.lanzou.file.FolderImpl;
 import me.lovesasuna.lanzou.file.Item;
 import me.lovesasuna.lanzou.utils.NetWorkUtil;
-import me.lovesasuna.lanzou.utils.ReaderUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,11 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import static java.util.regex.Pattern.compile;
 
 /**
  * @author LovesAsuna

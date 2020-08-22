@@ -1,13 +1,12 @@
 package me.lovesasuna.lanzou.file;
 
-import me.lovesasuna.lanzou.bean.DownloadableURL;
 import me.lovesasuna.lanzou.bean.Triple;
+import me.lovesasuna.lanzou.network.Downloadable;
 import me.lovesasuna.lanzou.utils.DownloadUtil;
 import me.lovesasuna.lanzou.utils.NetWorkUtil;
 import me.lovesasuna.lanzou.utils.ReaderUtil;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 import java.util.regex.Matcher;
