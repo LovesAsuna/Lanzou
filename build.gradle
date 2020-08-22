@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.0.0'
+    id "com.jfrog.bintray" version "1.8.5"
+    id 'maven-publish'
+}
+
+repositories {
+    mavenLocal()
+
+    jcenter()
+
+    mavenCentral()
+}
+
+defaultTasks("shadowjar")
+
+dependencies {
+    compileOnly "com.fasterxml.jackson.core:jackson-databind:2.11.1"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.11.1"
+}
+
+group 'me.lovesasuna'
+version '1.0'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-Xlint:deprecation')
+    options.compilerArgs.add('-Xlint:unchecked')
+}
+
+java {
+    withSourcesJar()
+}
+
+bintray {
+    user = 'lovesasuna'
+    key = System.getenv("JcenterKey")
+    publications = ['plugin']
+    pkg {
+        repo = 'maven'
+        name = 'EasyLib'
+        licenses = ['LPGL-3.0']
+        vcsUrl = 'https://github.com/LovesAsuna/EasyLib.git'
+        version {
+            name = project.version
+            desc = 'Minecraft Plugin Dependency'
+            released = new Date()
+        }
+    }
+}
+
+publishing {
+    publications {
+        plugin(MavenPublication) {
+            from components.java
+            description 'Minecraft Plugin Dependency'
+            pom {
+                developers {
+                    developer {
+                        name = 'LovesAsuna'
+                    }
+                }
+                licenses {
+                    license {
+                        name = 'LGPL-3.0'
+                        url = 'https://github.com/LovesAsuna/EasyLib/raw/master/LICENSE'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/LovesAsuna/EasyLib'
+                }
+            }
+        }
+    }
+}
