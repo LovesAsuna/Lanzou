@@ -23,7 +23,7 @@ https://jcenter.bintray.com/
 ```
 ### Gradle
 ```
-implementation 'org.sct.vault:VaultAPI:1.7'
+implementation 'me.lovesasuna:Lanzou:1.0'
 ```
 ----------------------------------------------------
 [Codacy Status]:https://app.codacy.com/project/badge/Grade/0364d226b78149979387cb47f44b365c
