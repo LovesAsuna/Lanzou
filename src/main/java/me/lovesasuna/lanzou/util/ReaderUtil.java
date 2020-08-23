@@ -1,8 +1,7 @@
-package me.lovesasuna.lanzou.utils;
+package me.lovesasuna.lanzou.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Reader;
 
 /**
  * @author LovesAsuna

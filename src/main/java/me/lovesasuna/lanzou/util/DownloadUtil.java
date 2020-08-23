@@ -1,4 +1,4 @@
-package me.lovesasuna.lanzou.utils;
+package me.lovesasuna.lanzou.util;
 
 import java.io.File;
 import java.io.FileOutputStream;

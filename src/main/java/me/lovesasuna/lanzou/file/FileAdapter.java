@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.lovesasuna.lanzou.bean.Triple;
 import me.lovesasuna.lanzou.bean.User;
 import me.lovesasuna.lanzou.network.Uploadable;
-import me.lovesasuna.lanzou.utils.NetWorkUtil;
+import me.lovesasuna.lanzou.util.NetWorkUtil;
 
 import java.io.*;
 import java.util.Objects;

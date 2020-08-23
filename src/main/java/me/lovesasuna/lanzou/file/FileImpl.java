@@ -3,9 +3,9 @@ package me.lovesasuna.lanzou.file;
 import me.lovesasuna.lanzou.bean.Debuger;
 import me.lovesasuna.lanzou.bean.Triple;
 import me.lovesasuna.lanzou.network.Downloadable;
-import me.lovesasuna.lanzou.utils.DownloadUtil;
-import me.lovesasuna.lanzou.utils.NetWorkUtil;
-import me.lovesasuna.lanzou.utils.ReaderUtil;
+import me.lovesasuna.lanzou.util.DownloadUtil;
+import me.lovesasuna.lanzou.util.NetWorkUtil;
+import me.lovesasuna.lanzou.util.ReaderUtil;
 
 import java.io.*;
 import java.net.URL;

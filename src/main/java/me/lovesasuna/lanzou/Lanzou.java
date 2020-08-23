@@ -4,7 +4,7 @@ import me.lovesasuna.lanzou.bean.Triple;
 import me.lovesasuna.lanzou.file.FileImpl;
 import me.lovesasuna.lanzou.file.FolderImpl;
 import me.lovesasuna.lanzou.file.Item;
-import me.lovesasuna.lanzou.utils.NetWorkUtil;
+import me.lovesasuna.lanzou.util.NetWorkUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -3,9 +3,9 @@ package me.lovesasuna.lanzou.file;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.lovesasuna.lanzou.bean.Triple;
-import me.lovesasuna.lanzou.utils.BasicUtil;
-import me.lovesasuna.lanzou.utils.NetWorkUtil;
-import me.lovesasuna.lanzou.utils.ReaderUtil;
+import me.lovesasuna.lanzou.util.BasicUtil;
+import me.lovesasuna.lanzou.util.NetWorkUtil;
+import me.lovesasuna.lanzou.util.ReaderUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

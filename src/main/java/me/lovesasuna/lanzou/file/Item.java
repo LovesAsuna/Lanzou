@@ -1,7 +1,7 @@
 package me.lovesasuna.lanzou.file;
 
 import me.lovesasuna.lanzou.network.Downloadable;
-import me.lovesasuna.lanzou.utils.ReaderUtil;
+import me.lovesasuna.lanzou.util.ReaderUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;

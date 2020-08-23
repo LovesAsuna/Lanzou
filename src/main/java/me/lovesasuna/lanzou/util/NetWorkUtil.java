@@ -1,4 +1,4 @@
-package me.lovesasuna.lanzou.utils;
+package me.lovesasuna.lanzou.util;
 
 import me.lovesasuna.lanzou.bean.Triple;
 
