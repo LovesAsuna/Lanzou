@@ -1,47 +1,21 @@
 package me.lovesasuna.lanzou.util;
 
 import me.lovesasuna.lanzou.bean.Triple;
+import okhttp3.*;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * @author LovesAsuna
  * @date 2020/8/22 9:30
  **/
 public class NetWorkUtil {
-    public static Triple<Integer, InputStream, Integer> get(String urlString, String[]... headers) {
-        try {
-            URL url = new URL(urlString);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            connect(conn, headers);
-            int responseCore = conn.getResponseCode();
-            InputStream inputStream = null;
-            if (responseCore == 200) {
-                inputStream = conn.getInputStream();
-            } else {
-                inputStream = conn.getErrorStream();
-            }
-            int length = conn.getContentLength();
-            return new Triple<>(responseCore, inputStream, length);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    private static final OkHttpClient client = new OkHttpClient();
 
-    private static void connect(HttpURLConnection conn, String[]... headers) {
-        try {
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(5 * 1000);
-            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36");
-            for (String[] header : headers) {
-                conn.setRequestProperty(header[0], header[1]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static Triple<Integer, InputStream, Long> get(String urlString, String[]... headers) {
+        Request.Builder builder = new Request.Builder().url(urlString).get();
+        return getTriple(builder, headers);
     }
 
     public static ByteArrayOutputStream inputStreamClone(InputStream inputStream) {
@@ -60,25 +34,21 @@ public class NetWorkUtil {
         }
     }
 
-    public static Triple<Integer, InputStream, Integer> post(String urlString, byte[] body, String[]... headers) {
+    public static Triple<Integer, InputStream, Long> post(String urlString, byte[] body, String[]... headers) {
+        RequestBody requestBody = RequestBody.create(body, null);
+        Request.Builder builder = new Request.Builder().url(urlString).post(requestBody);
+        return getTriple(builder, headers);
+    }
+
+    private static Triple<Integer, InputStream, Long> getTriple(Request.Builder builder, String[]... headers) {
+        builder.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36");
+        for (String[] head : headers) {
+            builder.addHeader(head[0], head[1]);
+        }
+        Call call = client.newCall(builder.build());
         try {
-            URL url = new URL(urlString);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            connect(conn, headers);
-            OutputStream outputStream = conn.getOutputStream();
-            DataOutputStream writer = new DataOutputStream(outputStream);
-            writer.write(body);
-            writer.flush();
-            int responseCore = conn.getResponseCode();
-            InputStream inputStream;
-            if (responseCore == 200) {
-                inputStream = conn.getInputStream();
-            } else {
-                inputStream = conn.getErrorStream();
-            }
-            int length = conn.getContentLength();
-            return new Triple<>(responseCore, inputStream, length);
+            Response response = call.execute();
+            return new Triple<>(response.code(), response.body().byteStream(), response.body().contentLength());
         } catch (IOException e) {
             e.printStackTrace();
             return null;

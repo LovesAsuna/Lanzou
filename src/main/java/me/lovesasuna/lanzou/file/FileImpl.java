@@ -62,7 +62,7 @@ public class FileImpl extends FileItem implements Downloadable {
             // 文件
             Debuger debuger = new Debuger();
             debuger.setItem(this);
-            Triple<Integer, InputStream, Integer> result;
+            Triple<Integer, InputStream, Long> result;
             ReaderUtil.readAnyTime(3, reader);
             String line = reader.readLine();
             Matcher matcher;

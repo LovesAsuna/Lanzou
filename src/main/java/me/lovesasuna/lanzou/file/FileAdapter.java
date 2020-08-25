@@ -61,7 +61,7 @@ public class FileAdapter implements Uploadable {
             baos.write(builder.toString().getBytes());
             baos.write(NetWorkUtil.inputStreamClone(inputStream).toByteArray());
             baos.write(("\n" + prefix + "--").getBytes());
-            Triple<Integer, InputStream, Integer> result = NetWorkUtil.post("https://pc.woozooo.com/fileup.php",
+            Triple<Integer, InputStream, Long> result = NetWorkUtil.post("https://pc.woozooo.com/fileup.php",
                     baos.toByteArray(),
                     new String[]{"content-type", contentType},
                     new String[]{"cookie", user.getCookie()},
@@ -70,9 +70,13 @@ public class FileAdapter implements Uploadable {
             );
             Objects.requireNonNull(result);
             BufferedReader reader = new BufferedReader(new InputStreamReader(result.second));
-            String line = reader.readLine();
+            String line = null;
+            while ((line = reader.readLine())!= null) {
+                System.out.println(line);
+
+            }
             ObjectMapper mapper = new ObjectMapper();
-            System.out.println(mapper.readTree(line).toString());
+//            System.out.println(mapper.readTree(line).toString());
             reader.close();
             return true;
         } catch (IOException e) {

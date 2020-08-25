@@ -5,6 +5,7 @@ import me.lovesasuna.lanzou.file.FileImpl;
 import me.lovesasuna.lanzou.file.FolderImpl;
 import me.lovesasuna.lanzou.file.Item;
 import me.lovesasuna.lanzou.util.NetWorkUtil;
+import okhttp3.OkHttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class Lanzou {
 
     private Item getItem(String suffix) throws NullPointerException {
         String lanzousUrl = "https://wwa.lanzous.com/" + suffix;
-        Triple<Integer, InputStream, Integer> result = NetWorkUtil.get(lanzousUrl);
+        Triple<Integer, InputStream, Long> result = NetWorkUtil.get(lanzousUrl);
         Objects.requireNonNull(result);
         BufferedReader reader = new BufferedReader(new InputStreamReader(result.second));
         try {

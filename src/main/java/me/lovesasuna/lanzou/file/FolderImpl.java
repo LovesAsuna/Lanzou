@@ -29,7 +29,7 @@ public class FolderImpl extends FolderItem {
     public void init(BufferedReader reader, boolean debug) {
         try {
             // 文件夹
-            Triple<Integer, InputStream, Integer> result;
+            Triple<Integer, InputStream, Long> result;
             ReaderUtil.readAnyTime(68, reader);
             String t = reader.readLine().split("'")[1];
             String k = reader.readLine().split("'")[1];
