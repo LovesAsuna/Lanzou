@@ -70,13 +70,9 @@ public class FileAdapter implements Uploadable {
             );
             Objects.requireNonNull(result);
             BufferedReader reader = new BufferedReader(new InputStreamReader(result.second));
-            String line = null;
-            while ((line = reader.readLine())!= null) {
-                System.out.println(line);
-
-            }
+            String line = reader.readLine();
             ObjectMapper mapper = new ObjectMapper();
-//            System.out.println(mapper.readTree(line).toString());
+            System.out.println(mapper.readTree(line).toString());
             reader.close();
             return true;
         } catch (IOException e) {
