@@ -2,6 +2,7 @@ package me.lovesasuna.lanzou;
 
 import me.lovesasuna.lanzou.bean.Triple;
 import me.lovesasuna.lanzou.file.FileImpl;
+import me.lovesasuna.lanzou.file.FileItem;
 import me.lovesasuna.lanzou.file.FolderImpl;
 import me.lovesasuna.lanzou.file.Item;
 import me.lovesasuna.lanzou.util.NetWorkUtil;
@@ -33,6 +34,15 @@ public class Lanzou {
     public Item parseSuffix(String suffix) {
         item = getItem(suffix);
         return item;
+    }
+
+    public static URL getFileDownloadUrl(String suffix) {
+        Lanzou instance = new Lanzou();
+        Item item = instance.parseSuffix(suffix);
+        if (item instanceof FolderImpl) {
+            throw new IllegalArgumentException("This is not a file");
+        }
+        return ((FileItem) item).getDownloadableUrl();
     }
 
     public Item parseUrl(URL url) {

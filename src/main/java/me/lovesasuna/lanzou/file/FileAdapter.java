@@ -36,7 +36,6 @@ public class FileAdapter extends Multipart implements Uploadable {
     private boolean uploadFile(User user, File file, int loc) {
         Objects.requireNonNull(user, "user can not be null");
         Objects.requireNonNull(file, "file can not be null");
-        StringBuilder builder = new StringBuilder();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             long size = file.length();

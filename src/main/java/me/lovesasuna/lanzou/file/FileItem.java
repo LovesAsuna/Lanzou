@@ -9,9 +9,13 @@ import java.net.URL;
  **/
 public abstract class FileItem extends Item {
     protected final String MAGIC = "_c_c";
-    URL downloadableUrl;
+    protected URL downloadableUrl;
     protected String icon;
     protected String name;
     protected String size;
     protected String time;
+
+    public URL getDownloadableUrl() {
+        return downloadableUrl;
+    }
 }
