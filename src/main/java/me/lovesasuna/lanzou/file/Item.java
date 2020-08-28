@@ -29,5 +29,5 @@ public abstract class Item implements Downloadable {
         }
     }
 
-    public abstract void init(BufferedReader reader, boolean debug);
+    public abstract void init(BufferedReader reader);
 }

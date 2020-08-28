@@ -6,7 +6,6 @@ import me.lovesasuna.lanzou.file.FileItem;
 import me.lovesasuna.lanzou.file.FolderImpl;
 import me.lovesasuna.lanzou.file.Item;
 import me.lovesasuna.lanzou.util.NetWorkUtil;
-import okhttp3.OkHttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,15 +20,8 @@ import java.util.Objects;
  **/
 public class Lanzou {
     private Item item;
-    private boolean debug;
 
-    public Lanzou() {
-        this(false);
-    }
-
-    public Lanzou(boolean debug) {
-        this.debug = debug;
-    }
+    public Lanzou() {}
 
     public Item parseSuffix(String suffix) {
         item = getItem(suffix);
@@ -66,7 +58,7 @@ public class Lanzou {
                 FolderImpl folder = new FolderImpl(suffix);
                 item = folder;
             }
-            item.init(reader, false);
+            item.init(reader);
             return item;
         } finally {
             try {

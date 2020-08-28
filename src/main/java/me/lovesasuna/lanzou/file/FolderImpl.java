@@ -26,7 +26,7 @@ public class FolderImpl extends FolderItem {
     }
 
     @Override
-    public void init(BufferedReader reader, boolean debug) {
+    public void init(BufferedReader reader) {
         try {
             // 文件夹
             Triple<Integer, InputStream, Long> result;
@@ -62,18 +62,18 @@ public class FolderImpl extends FolderItem {
             for (int i = 0; i < length; i++) {
                 JsonNode fileNode = text.get(i);
                 String id = fileNode.get("id").asText();
-                String icon = fileNode.get("icon").asText();
-                String name = fileNode.get("name_all").asText();
-                String size = fileNode.get("size").asText();
-                String time = fileNode.get("time").asText();
-                FileImpl file = new FileImpl(id);
-                file.setIcon(icon).setName(name).setTime(time).setSize(size);
+                FileItem file = new FileImpl(id);
+                file.icon = fileNode.get("icon").asText();
+                file.name = fileNode.get("name_all").asText();
+                file.size = fileNode.get("size").asText();
+                file.time = fileNode.get("time").asText();
+
                 String lanzousUrl = "https://wwa.lanzous.com/" + id;
                 result = NetWorkUtil.get(lanzousUrl);
                 Objects.requireNonNull(result);
                 reader = new BufferedReader(new InputStreamReader(result.second));
                 if (Item.isFile(reader)) {
-                    file.init(reader, false);
+                    file.init(reader);
                 }
                 fileItemSet.add(file);
             }
