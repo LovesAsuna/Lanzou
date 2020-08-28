@@ -1,57 +1,61 @@
-package me.lovesasuna.lanzou.util;
+package me.lovesasuna.lanzou.util
 
-import me.lovesasuna.lanzou.bean.Triple;
-import okhttp3.*;
-
-import java.io.*;
-import java.net.HttpURLConnection;
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.InputStream
 
 /**
  * @author LovesAsuna
  * @date 2020/8/22 9:30
- **/
-public class NetWorkUtil {
-    private static final OkHttpClient client = new OkHttpClient();
-
-    public static Triple<Integer, InputStream, Long> get(String urlString, String[]... headers) {
-        Request.Builder builder = new Request.Builder().url(urlString).get();
-        return getTriple(builder, headers);
+ */
+object NetWorkUtil {
+    private val client = OkHttpClient()
+    operator fun get(urlString: String, vararg headers: Array<String>): Triple<Int, InputStream, Long>? {
+        val builder = Request.Builder().url(urlString).get()
+        return getTriple(builder, *headers)
     }
 
-    public static ByteArrayOutputStream inputStreamClone(InputStream inputStream) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = inputStream.read(buffer)) != -1) {
-                baos.write(buffer, 0, len);
+    fun inputStreamClone(inputStream: InputStream): ByteArrayOutputStream? {
+        return try {
+            val baos = ByteArrayOutputStream()
+            val buffer = ByteArray(1024)
+            var len: Int
+            while (inputStream.read(buffer).also { len = it } != -1) {
+                baos.write(buffer, 0, len)
             }
-            baos.flush();
-            return baos;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            baos.flush()
+            baos
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
         }
     }
 
-    public static Triple<Integer, InputStream, Long> post(String urlString, byte[] body, String[]... headers) {
-        RequestBody requestBody = RequestBody.create(body, null);
-        Request.Builder builder = new Request.Builder().url(urlString).post(requestBody);
-        return getTriple(builder, headers);
+    fun post(urlString: String, body: ByteArray, vararg headers: Array<String>): Triple<Int, InputStream, Long>? {
+        val requestBody: RequestBody = body.toRequestBody()
+        val builder = Request.Builder().url(urlString).post(requestBody)
+        return getTriple(builder, *headers)
     }
 
-    private static Triple<Integer, InputStream, Long> getTriple(Request.Builder builder, String[]... headers) {
-        builder.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36");
-        for (String[] head : headers) {
-            builder.addHeader(head[0], head[1]);
+    private fun getTriple(builder: Request.Builder, vararg headers: Array<String>): Triple<Int, InputStream, Long>? {
+        builder.addHeader(
+            "User-Agent",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"
+        )
+        for (head in headers) {
+            builder.addHeader(head[0], head[1])
         }
-        Call call = client.newCall(builder.build());
-        try {
-            Response response = call.execute();
-            return new Triple<>(response.code(), response.body().byteStream(), response.body().contentLength());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        val call = client.newCall(builder.build())
+        return try {
+            val response = call.execute()
+            Triple(response.code, response.body!!.byteStream(), response.body!!.contentLength())
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
         }
     }
 }

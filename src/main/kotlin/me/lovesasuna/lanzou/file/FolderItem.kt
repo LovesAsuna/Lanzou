@@ -1,15 +1,10 @@
-package me.lovesasuna.lanzou.file;
-
-import java.util.Set;
+package me.lovesasuna.lanzou.file
 
 /**
  * @author LovesAsuna
  * @date 2020/8/22 10:11
- **/
-public abstract class FolderItem extends Item {
-    protected Set<FileItem> fileItemSet;
-
-    public Set<FileItem> getFileItemSet() {
-        return fileItemSet;
-    }
+ */
+abstract class FolderItem : Item() {
+    lateinit var fileItemSet: MutableSet<FileItem>
+        protected set
 }
