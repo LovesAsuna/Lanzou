@@ -8,5 +8,5 @@ import java.io.File
  * @date 2020/8/22 14:07
  */
 interface Uploadable {
-    fun upload(user: User, file: File, loc: Int): Boolean
+    fun upload(user: User, loc: Int, vararg file: File): Boolean
 }
