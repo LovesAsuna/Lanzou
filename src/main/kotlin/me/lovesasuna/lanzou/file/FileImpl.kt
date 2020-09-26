@@ -62,7 +62,7 @@ class FileImpl(id: String) : FileItem(), Downloadable {
             reader.close()
             val fn = src.split("\"").toTypedArray()[5]
             val fnurl = "https://wwa.lanzous.com$fn"
-            result = NetWorkUtil.get(fnurl)
+            result = NetWorkUtil[fnurl]
             Objects.requireNonNull(result)
             reader = BufferedReader(InputStreamReader(result!!.second))
             val regex = Regex("'\\w*$MAGIC'")

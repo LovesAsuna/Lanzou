@@ -30,19 +30,16 @@ class Lanzou {
     @Throws(NullPointerException::class)
     private fun getItem(suffix: String): Item {
         val lanzousUrl = "https://wwa.lanzous.com/$suffix"
-        val result = NetWorkUtil.get(lanzousUrl)
+        val result = NetWorkUtil[lanzousUrl]
         Objects.requireNonNull(result)
         val reader = BufferedReader(InputStreamReader(result!!.second))
         return try {
-            val item: Item
-            item = if (Item.isFile(reader)) {
+            val item: Item = if (Item.isFile(reader)) {
                 // 文件
-                val file = FileImpl(suffix)
-                file
+                FileImpl(suffix)
             } else {
                 // 文件夹
-                val folder = FolderImpl(suffix)
-                folder
+                FolderImpl(suffix)
             }
             item.init(reader)
             item
