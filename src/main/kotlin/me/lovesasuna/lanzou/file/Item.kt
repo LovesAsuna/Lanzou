@@ -22,9 +22,17 @@ abstract class Item : Downloadable {
          */
         fun isFile(reader: BufferedReader): Boolean {
             return try {
-                ReaderUtil.readAnyTime(18, reader)
-                val line = reader.readLine()
-                !line.contains("登录")
+                ReaderUtil.readAnyTime(5, reader)
+                var line = reader.readLine()
+                val isFile = line.contains("- 蓝奏云")
+                line = reader.readLine()
+                val n = if (line.contains("description")) {
+                    13
+                } else {
+                    12
+                }
+                ReaderUtil.readAnyTime(n, reader)
+                isFile
             } catch (e: IOException) {
                 false
             }
