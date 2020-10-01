@@ -2,7 +2,8 @@
 
 [![][Codacy Status img]][Codacy Status]
 [![][Build Status img]][Build Status]
-[![][license img]][license]
+[![][License img]][License Status]
+[![][Bintray img]][Bintray Status]
 
 Fast, simple, reliable.  Lanzou is a "zero-overhead" production ready library for lanzou service.  At roughly 5Kb, the library is very light.
 
@@ -32,5 +33,8 @@ implementation 'me.lovesasuna:Lanzou:1.0'
 [Build Status]:https://github.com/LovesAsuna/Mirai-Bot/actions
 [Build Status img]:https://github.com/LovesAsuna/Mirai-Bot/workflows/Java%20CI%20with%20Gradle/badge.svg
 
-[license]:LICENSE
-[license img]:https://img.shields.io/github/license/LovesAsuna/Lanzou.svg?style=popout
+[License Status]:LICENSE
+[License img]:https://img.shields.io/github/license/LovesAsuna/Lanzou.svg?style=popout
+
+[Bintray Status]:https://bintray.com/lovesasuna/maven/Lanzou
+[Bintray img]:https://img.shields.io/bintray/v/lovesasuna/maven/Lanzou?style=flat-square
