@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'org.jetbrains.kotlin.jvm' version '1.4.10'
-    id "com.jfrog.bintray" version "1.8.5"
     id 'maven-publish'
 }
 
@@ -39,46 +38,4 @@ tasks.withType(JavaCompile) {
 
 java {
     withSourcesJar()
-}
-
-bintray {
-    user = 'lovesasuna'
-    key = System.getenv("JcenterKey")
-    publications = ['plugin']
-    pkg {
-        repo = 'maven'
-        name = 'Lanzou'
-        licenses = ['AGPL-3.0']
-        vcsUrl = 'https://github.com/LovesAsuna/Lanzou.git'
-        version {
-            name = project.version
-            desc = 'Library for Lanzou'
-            released = new Date()
-        }
-    }
-}
-
-publishing {
-    publications {
-        plugin(MavenPublication) {
-            from components.java
-            description 'Library for Lanzou'
-            pom {
-                developers {
-                    developer {
-                        name = 'LovesAsuna'
-                    }
-                }
-                licenses {
-                    license {
-                        name = 'AGPL-3.0'
-                        url = 'https://github.com/LovesAsuna/Lanzou/raw/master/LICENSE'
-                    }
-                }
-                scm {
-                    url = 'https://github.com/LovesAsuna/Lanzou'
-                }
-            }
-        }
-    }
 }
