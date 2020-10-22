@@ -39,3 +39,28 @@ tasks.withType(JavaCompile) {
 java {
     withSourcesJar()
 }
+
+publishing {
+    publications {
+        plugin(MavenPublication) {
+            from components.java
+            description 'Library for Lanzou'
+            pom {
+                developers {
+                    developer {
+                        name = 'LovesAsuna'
+                    }
+                }
+                licenses {
+                    license {
+                        name = 'AGPL-3.0'
+                        url = 'https://github.com/LovesAsuna/Lanzou/raw/master/LICENSE'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/LovesAsuna/Lanzou'
+                }
+            }
+        }
+    }
+}
