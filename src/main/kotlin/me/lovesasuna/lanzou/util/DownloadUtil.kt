@@ -3,8 +3,6 @@ package me.lovesasuna.lanzou.util
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
 
 /**
  * @author LovesAsuna
@@ -13,14 +11,12 @@ import java.net.URL
 object DownloadUtil {
     fun download(urlString: String, fileName: String, savePath: String, vararg heads: Array<String>): Boolean {
         return try {
-            val url = URL(urlString)
-            val conn = url.openConnection() as HttpURLConnection
-            conn.requestMethod = "GET"
+            val map = HashMap<String, String>()
             for (head in heads) {
-                conn.setRequestProperty(head[0], head[1])
+                map[head[0]] = head[1]
             }
-            conn.connect()
-            download(conn, fileName, savePath)
+            val bytes = OkHttpUtil.getBytes(urlString, OkHttpUtil.addHeaders(map))
+            download(bytes, fileName, savePath)
             true
         } catch (e: IOException) {
             false
@@ -28,29 +24,23 @@ object DownloadUtil {
     }
 
     /**
-     * @param conn     已经设置好属性并已经连接的HttpURLConnection
+     * @param byteArray 字节数组
      * @param fileName 不包含路径的文件名
      * @param savePath 不包含文件名的路径
      */
     @Throws(IOException::class)
-    fun download(conn: HttpURLConnection, fileName: String, savePath: String) {
-        download(conn, File(savePath + File.separator + fileName))
+    fun download(byteArray: ByteArray, fileName: String, savePath: String) {
+        download(byteArray, File(savePath + File.separator + fileName))
     }
 
     /**
-     * @param conn     已经设置好属性并已经连接的HttpURLConnection
-     * @param file     文件绝对路径
+     * @param byteArray 字节数组
+     * @param file 文件绝对路径
      */
     @Throws(IOException::class)
-    fun download(conn: HttpURLConnection, file: File) {
-        val inputStream = conn.inputStream
-        var length: Int
-        val bytes = ByteArray(2048)
+    fun download(byteArray: ByteArray, file: File) {
         val fout = FileOutputStream(file)
-        while (inputStream.read(bytes).also { length = it } != -1) {
-            fout.write(bytes, 0, length)
-        }
+        fout.write(byteArray)
         fout.close()
-        conn.disconnect()
     }
 }
