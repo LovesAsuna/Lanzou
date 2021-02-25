@@ -22,13 +22,14 @@ shadowJar {
 defaultTasks("shadowjar")
 
 dependencies {
-    api 'com.squareup.retrofit2:retrofit:2.9.0'
-    api 'com.squareup.retrofit2:converter-jackson:2.9.0'
-    api 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    compileOnly 'com.squareup.retrofit2:retrofit:2.9.0'
+    compileOnly 'com.squareup.retrofit2:converter-jackson:2.9.0'
+    compileOnly 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    compileOnly "com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1"
 }
 
 group 'me.lovesasuna'
-version '1.3.7'
+version '1.3.8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
